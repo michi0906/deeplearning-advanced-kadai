@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>画像判定アプリ</title>
+</head>
+<body>
+  <h1>画像をアップロードしてください</h1>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="image">
+    <button type="submit">判定</button>
+  </form>
+
+  {% if result %}
+  <h2>判定結果（上位5カテゴリ）</h2>
+  <ul>
+    {% for r in result %}
+    <li>{{ r.1 }} - {{ r.2|floatformat:2 }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</body>
+</html>
